@@ -11,6 +11,56 @@ cQuestion = question =>
 cAnswer = ans =>
     answerModel.create(ans);
 
+findAnswerOfQuestionByStudent = (sid,qid) =>
+    answerModel.find({
+        student:sid,
+        question:qid
+    });
+
+findAllStudents = ()=>{
+    return studentModel.find();
+};
+
+findStudentById = id=>{
+    return studentModel.findId(id);
+};
+
+upStudent = (studentId, student) =>
+    studentModel.update({_id: studentId}, {$set: student});
+
+delStudent = studentId =>
+    studentModel.remove({_id: studentId});
+
+upQuestion = (qid, ques) =>
+    questionModel.update({_id: qid}, {$set: ques});
+
+delQuestion = id =>
+    questionModel.remove({_id: id});
+
+findAllAnswers = ()=>{
+    return answerModel.find();
+};
+
+findAnswerById = id=>{
+    return answerModel.findId(id);
+};
+
+findAllQuestions = ()=>{
+    return questionModel.find();
+};
+
+findQuestionById = id=>{
+    return questionModel.findId(id);
+};
+
+findAnswersByStudentId = sid=>{
+    return answerModel.find({student:sid});
+};
+
+findAnswersByQuestionId = qid=>{
+    return answerModel.find({question:qid});
+};
+
 populate=()=>
 {
     var students=[{
@@ -77,57 +127,57 @@ populate=()=>
     }
     var answers=[{
         _id:123,
-        student:{_id:123},
-        question:{_id:321},
+        student:123,
+        question:321,
         trueFalseAnswer:true,
         multipleChoiceAnswer:null,
     },
         {
             _id:234,
-            student:{_id:123},
-            question:{_id:432},
+            student:123,
+            question:432,
             trueFalseAnswer:false,
             multipleChoiceAnswer:null,
         },
         {
             _id:345,
-            student:{_id:123},
-            question:{_id:543},
+            student:123,
+            question:543,
             trueFalseAnswer:null,
             multipleChoiceAnswer:1,
         },
         {
             _id:456,
-            student:{_id:123},
-            question:{_id:654},
+            student:123,
+            question:654,
             trueFalseAnswer:null,
             multipleChoiceAnswer:2,
         },
         {
             _id:567,
-            student:{_id:234},
-            question:{_id:321},
+            student:234,
+            question:321,
             trueFalseAnswer:false,
             multipleChoiceAnswer:null,
         },
         {
             _id:678,
-            student:{_id:234},
-            question:{_id:432},
+            student:234,
+            question:432,
             trueFalseAnswer:true,
             multipleChoiceAnswer:null,
         },
         {
             _id:789,
-            student:{_id:234},
-            question:{_id:543},
+            student:234,
+            question:543,
             trueFalseAnswer:null,
             multipleChoiceAnswer:3,
         },
         {
             _id:890,
-            student:{_id:234},
-            question:{_id:654},
+            student:234,
+            question:654,
             trueFalseAnswer:null,
             multipleChoiceAnswer:24
         }
@@ -142,5 +192,18 @@ module.exports = {
     cStudent,
     cQuestion,
     cAnswer,
-    populate
+    populate,
+    findAllStudents,
+    findStudentById,
+    findAllAnswers,
+    findAnswerById,
+    findAllQuestions,
+    findQuestionById,
+    findAnswersByStudentId,
+    findAnswersByQuestionId,
+    upStudent,
+    delStudent,
+    upQuestion,
+    delQuestion,
+    findAnswerOfQuestionByStudent
 };
