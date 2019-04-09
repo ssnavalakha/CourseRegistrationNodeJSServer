@@ -1,4 +1,4 @@
-const answerDao = require('../dao/university.dao.server');
+const answerDao = require('../dao/answers.dao');
 createAnswer = (req, res) =>
     res.json(answerDao.cAnswer(req.body));
 

@@ -1,65 +1,6 @@
-const studentModel = require('../data/models/student.model.server');
-const questionModel = require('../data/models/question.model.server');
-const answerModel = require('../data/models/answer.model.server');
-
-cStudent = student =>
-    studentModel.create(student);
-
-cQuestion = question =>
-    questionModel.create(question);
-
-cAnswer = ans =>
-    answerModel.create(ans);
-
-findAnswerOfQuestionByStudent = (sid,qid) =>
-    answerModel.find({
-        student:sid,
-        question:qid
-    });
-
-findAllStudents = ()=>{
-    return studentModel.find();
-};
-
-findStudentById = id=>{
-    return studentModel.findId(id);
-};
-
-upStudent = (studentId, student) =>
-    studentModel.update({_id: studentId}, {$set: student});
-
-delStudent = studentId =>
-    studentModel.remove({_id: studentId});
-
-upQuestion = (qid, ques) =>
-    questionModel.update({_id: qid}, {$set: ques});
-
-delQuestion = id =>
-    questionModel.remove({_id: id});
-
-findAllAnswers = ()=>{
-    return answerModel.find();
-};
-
-findAnswerById = id=>{
-    return answerModel.findId(id);
-};
-
-findAllQuestions = ()=>{
-    return questionModel.find();
-};
-
-findQuestionById = id=>{
-    return questionModel.findId(id);
-};
-
-findAnswersByStudentId = sid=>{
-    return answerModel.find({student:sid});
-};
-
-findAnswersByQuestionId = qid=>{
-    return answerModel.find({question:qid});
-};
+const studentDao = require('./student.dao');
+const questionDao = require('./questions.dao');
+const answerDao = require('./answers.dao');
 
 populate=()=>
 {
@@ -83,7 +24,7 @@ populate=()=>
         }];
     for (var i=0;i<students.length;i++)
     {
-        cStudent(students[i]);
+        studentDao.cStudent(students[i]);
     }
     var questions=[{
         _id:321,
@@ -123,7 +64,7 @@ populate=()=>
         }];
     for (var j=0;j<questions.length;j++)
     {
-        cQuestion(questions[j]);
+        questionDao.cQuestion(questions[j]);
     }
     var answers=[{
         _id:123,
@@ -184,26 +125,10 @@ populate=()=>
     ];
     for(var k=0;k<answers.length;k++)
     {
-        cAnswer(answers[k]);
+        answerDao.cAnswer(answers[k]);
     }
 };
 
 module.exports = {
-    cStudent,
-    cQuestion,
-    cAnswer,
-    populate,
-    findAllStudents,
-    findStudentById,
-    findAllAnswers,
-    findAnswerById,
-    findAllQuestions,
-    findQuestionById,
-    findAnswersByStudentId,
-    findAnswersByQuestionId,
-    upStudent,
-    delStudent,
-    upQuestion,
-    delQuestion,
-    findAnswerOfQuestionByStudent
+    populate
 };

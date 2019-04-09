@@ -1,4 +1,4 @@
-const studentDao = require('../dao/university.dao.server');
+const studentDao = require('../dao/student.dao');
 createStudent = (req, res) =>
     res.json(studentDao.cStudent(req.body));
 findStudentAll =(req,res) =>

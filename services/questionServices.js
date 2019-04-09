@@ -1,4 +1,4 @@
-const QuestionDao = require('../dao/university.dao.server');
+const QuestionDao = require('../dao/questions.dao');
 createQuestion = (req, res) =>
     res.json(QuestionDao.cQuestion(req.body));
 findQuestionAll =(req,res) =>
