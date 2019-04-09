@@ -7,4 +7,5 @@ findAnswersOFStudentForQuestion = (req, res) =>
 
 module.exports={
     createAnswer,
+    findAnswersOFStudentForQuestion
 };

@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var uniServices=require('./services/universityServices');
 var studentServices=require('./services/studentServices');
 var questionServices=require('./services/questionServices');
+var answerServices=require('./services/answerServices');
 
 require('./db/database')();
 app.use(function(req, res, next) {
@@ -41,5 +42,7 @@ app.get('/api/question/:id', questionServices.findByIdQuestion);
 app.put('/api/question/:id', questionServices.updateQuestion);
 app.delete('/api/question/:id', questionServices.deleteQuestion);
 
+app.get('/api/student/:sid/question/:qid/answer', answerServices.findAnswersOFStudentForQuestion);
+app.post('/api/student/:sid/question/:qid/answer', answerServices.createAnswer);
 
 app.listen(3000);
