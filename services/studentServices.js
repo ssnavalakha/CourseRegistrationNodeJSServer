@@ -1,20 +1,30 @@
 const studentDao = require('../dao/student.dao');
 createStudent = (req, res) =>
-    res.json(studentDao.cStudent(req.body));
+{
+    studentDao.cStudent(req.body);
+    res.json(req.body);
+};
 findStudentAll =(req,res) =>
-    res.json(studentDao.findAllStudents());
+    studentDao.findAllStudents((err,result) => {
+        res.json(result)
+    });
+
 findByIdStudent = (req,res) =>
-    res.json(studentDao.findStudentById(req.params['id']));
+    studentDao.findStudentById(req.params['id'],(err,result) => {
+        res.json(result)
+    });
 
 deleteStudent = (req, res) =>
-    res.json(
-        studentDao.delStudent(req.params.id)
-    );
+    studentDao.delStudent(req.params.id,(err,result) => {
+        res.json(result)
+    });
 
 updateStudent = (req, res) =>
-    res.json(
-        studentDao.upStudent(req.params.id, req.body)
-    );
+{
+    studentDao.upStudent(req.params.id, req.body,(err,result) => {
+        res.json(result)
+    });
+};
 
 module.exports={
     createStudent,

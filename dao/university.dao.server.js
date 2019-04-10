@@ -1,7 +1,11 @@
 const studentDao = require('./student.dao');
 const questionDao = require('./questions.dao');
 const answerDao = require('./answers.dao');
-
+deleteEverything = () => {
+    answerDao.deleteAll();
+    questionDao.deleteAll();
+    studentDao.deleteAll();
+};
 populate=()=>
 {
     var students=[{
@@ -30,36 +34,34 @@ populate=()=>
         _id:321,
         question:"Is the following schema valid?",
         points:10,
-        multipleChoice:{},
-        trueFalse:{isTrue:false},
+        isTrue:false,
+        choices:"asd",
+        correct:0,
         type:"TRUE_FALSE"
         },
         {
             _id:432,
             question:"DAO stands for Dynamic Access Object.",
             points:10,
-            multipleChoice:{},
-            trueFalse:{isTrue:false},
+            isTrue:false,
             type:"TRUE_FALSE"
         },
         {
             _id:543,
             question:"What does JPA stand for?",
             points:10,
-            multipleChoice:{choices:"Java Persistence API,Java Persisted Application,JavaScript Persistence API," +
+            choices:"Java Persistence API,Java Persisted Application,JavaScript Persistence API," +
                     "JSON Persistent Associations",
-                correct:1},
-            trueFalse:{},
+            correct:1,
             type:"MULTIPLE_CHOICE"
         },
         {
             _id:654,
             question:"What does ORM stand for?",
             points:10,
-            multipleChoice:{choices:"Object Relational Model,Object Relative Markup," +
+            choices:"Object Relational Model,Object Relative Markup," +
                     "Object Reflexive Model,Object Relational Mapping",
-                correct:4},
-            trueFalse:{},
+             correct:4,
             type:"MULTIPLE_CHOICE"
         }];
     for (var j=0;j<questions.length;j++)
@@ -130,5 +132,6 @@ populate=()=>
 };
 
 module.exports = {
-    populate
+    populate,
+    deleteEverything
 };

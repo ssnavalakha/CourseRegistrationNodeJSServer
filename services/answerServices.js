@@ -1,9 +1,13 @@
 const answerDao = require('../dao/answers.dao');
-createAnswer = (req, res) =>
-    res.json(answerDao.cAnswer(req.body));
-
+createAnswer = (req, res) => {
+    answerDao.cAnswer(req.body);
+    res.json(req.body)
+};
 findAnswersOFStudentForQuestion = (req, res) =>
-    res.json(answerDao.findAnswerOfQuestionByStudent(req.params['sid'],req.params['qid']));
+    answerDao.findAnswerOfQuestionByStudent(req.params['sid'],req.params['qid'],
+        (err,result) => {
+            res.json(result)
+        });
 
 module.exports={
     createAnswer,

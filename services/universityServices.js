@@ -1,7 +1,11 @@
 const universityDAO = require('../dao/university.dao.server');
 createDatabase = (req, res) => {
-        universityDAO.populate();
+    res.json(universityDAO.populate());
 };
+truncateDatabase =(req,res)=>{
+    res.json(universityDAO.deleteEverything())
+}
 module.exports = {
-    createDatabase
+    createDatabase,
+    truncateDatabase
 }

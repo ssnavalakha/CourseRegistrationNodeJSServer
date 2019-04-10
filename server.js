@@ -11,12 +11,12 @@ app.use(session({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+require('./db/database')();
 var uniServices=require('./services/universityServices');
 var studentServices=require('./services/studentServices');
 var questionServices=require('./services/questionServices');
 var answerServices=require('./services/answerServices');
 
-require('./db/database')();
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin",
         "*");
@@ -28,11 +28,12 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/api/populate', uniServices.createDatabase);
+app.post('/api/populate', uniServices.createDatabase);
+app.delete('/api/all',uniServices.truncateDatabase);
 
 app.post('/api/student', studentServices.createStudent);
 app.get('/api/student', studentServices.findStudentAll);
-app.get('/api/student/:id', studentServices.findStudentAll);
+app.get('/api/student/:id', studentServices.findByIdStudent);
 app.put('/api/student/:id', studentServices.updateStudent);
 app.delete('/api/student/:id', studentServices.deleteStudent);
 
@@ -43,6 +44,7 @@ app.put('/api/question/:id', questionServices.updateQuestion);
 app.delete('/api/question/:id', questionServices.deleteQuestion);
 
 app.get('/api/student/:sid/question/:qid/answer', answerServices.findAnswersOFStudentForQuestion);
+app.get('/api/question/:qid/student/:sid/answer', answerServices.findAnswersOFStudentForQuestion);
 app.post('/api/student/:sid/question/:qid/answer', answerServices.createAnswer);
 
 app.listen(3000);

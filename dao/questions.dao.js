@@ -1,20 +1,24 @@
 const questionModel = require('../data/models/question.model.server');
 
-cQuestion = question =>
-    questionModel.create(question);
-
-upQuestion = (qid, ques) =>
-    questionModel.update({_id: qid}, {$set: ques});
-
-delQuestion = id =>
-    questionModel.remove({_id: id});
-
-findAllQuestions = ()=>{
-    return questionModel.find();
+cQuestion = (question) => {
+    return questionModel.create(question);
+};
+upQuestion = (qid, ques,cb) =>{
+  return  questionModel.update({_id: qid}, {$set: ques}).exec(cb);
+};
+delQuestion = (id,cb) => {
+    return questionModel.remove({_id: id}).exec(cb);
+};
+findAllQuestions = (cb)=>{
+    return questionModel.find().exec(cb);
 };
 
-findQuestionById = id=>{
-    return questionModel.findId(id);
+findQuestionById = (id,cb)=>{
+    return questionModel.findById(id).exec(cb);
+};
+
+deleteAll= ()=>{
+  return questionModel.deleteMany({});
 };
 
 module.exports = {
@@ -22,5 +26,6 @@ module.exports = {
     findAllQuestions,
     findQuestionById,
     upQuestion,
-    delQuestion
+    delQuestion,
+    deleteAll
 };

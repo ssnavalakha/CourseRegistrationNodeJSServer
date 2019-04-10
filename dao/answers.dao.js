@@ -1,27 +1,30 @@
 const answerModel = require('../data/models/answer.model.server');
-cAnswer = ans =>
-    answerModel.create(ans);
-
-findAnswerOfQuestionByStudent = (sid,qid) =>
+cAnswer = (ans) => {
+    return answerModel.create(ans);
+};
+findAnswerOfQuestionByStudent = (sid,qid,cb) =>
     answerModel.find({
         student:sid,
         question:qid
-    });
+    }).exec(cb);
 
-findAllAnswers = ()=>{
-    return answerModel.find();
+findAllAnswers = (cb)=>{
+    return answerModel.find().exec(cb)
 };
 
-findAnswerById = id=>{
-    return answerModel.findId(id);
+findAnswerById = (id,cb)=>{
+    return answerModel.findById(id).exec(cb);
 };
 
-findAnswersByStudentId = sid=>{
-    return answerModel.find({student:sid});
+findAnswersByStudentId = (sid,cb)=>{
+    return answerModel.find({student:sid}).exec(cb);
 };
 
-findAnswersByQuestionId = qid=>{
-    return answerModel.find({question:qid});
+findAnswersByQuestionId = (qid,cb)=>{
+    return answerModel.find({question:qid}).exec(cb);
+};
+deleteAll= ()=>{
+    return answerModel.deleteMany({});
 };
 module.exports = {
     cAnswer,
@@ -29,5 +32,6 @@ module.exports = {
     findAnswerById,
     findAnswersByStudentId,
     findAnswersByQuestionId,
-    findAnswerOfQuestionByStudent
+    findAnswerOfQuestionByStudent,
+    deleteAll
 };

@@ -1,20 +1,27 @@
 const QuestionDao = require('../dao/questions.dao');
-createQuestion = (req, res) =>
-    res.json(QuestionDao.cQuestion(req.body));
+createQuestion = (req, res) =>{
+    QuestionDao.cQuestion(req.body);
+    res.json(req.body)
+}
+
 findQuestionAll =(req,res) =>
-    res.json(QuestionDao.findAllQuestions());
+    QuestionDao.findAllQuestions((err,result) => {
+        res.json(result)
+    });
 findByIdQuestion = (req,res) =>
-    res.json(QuestionDao.findQuestionById(req.params['id']));
+    QuestionDao.findQuestionById(req.params['id'],(err,result) => {
+        res.json(result)
+    });
 
-deleteQuestion = (req, res) =>
-    res.json(
-        QuestionDao.delQuestion(req.params.id)
-    );
-
+deleteQuestion = (req, res) => {
+        QuestionDao.delQuestion(req.params.id,(err,result) => {
+            res.json(result)
+        })
+};
 updateQuestion = (req, res) =>
-    res.json(
-        QuestionDao.upQuestion(req.params.id, req.body)
-    );
+    QuestionDao.upQuestion(req.params.id, req.body,(err,result) => {
+        res.json(result)
+    });
 
 module.exports={
     createQuestion,
