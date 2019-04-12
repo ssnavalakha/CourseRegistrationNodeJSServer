@@ -2,7 +2,7 @@ module.exports = function () {
     const mongoose = require('mongoose');
     const databaseName = 'white-board';
     var   connectionString =
-        'mongodb://localhost/';
+        process.env.MONGODB_URI;
     connectionString += databaseName;
     mongoose.connect(connectionString);
 };
