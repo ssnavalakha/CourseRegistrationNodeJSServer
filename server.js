@@ -47,4 +47,4 @@ app.get('/api/student/:sid/question/:qid/answer', answerServices.findAnswersOFSt
 app.get('/api/question/:qid/student/:sid/answer', answerServices.findAnswersOFStudentForQuestion);
 app.post('/api/student/:sid/question/:qid/answer', answerServices.createAnswer);
 
-app.listen(3000);
+app.listen(process.env.PORT || 8080);
