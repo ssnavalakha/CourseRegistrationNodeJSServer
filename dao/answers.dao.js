@@ -6,7 +6,7 @@ findAnswerOfQuestionByStudent = (sid,qid,cb) =>
     answerModel.find({
         student:sid,
         question:qid
-    }).exec(cb);
+    }).populate('student').populate('question').exec(cb);
 
 findAllAnswers = (cb)=>{
     return answerModel.find().exec(cb)
@@ -24,7 +24,7 @@ findAnswersByQuestionId = (qid,cb)=>{
     return answerModel.find({question:qid}).exec(cb);
 };
 deleteAll= ()=>{
-    return answerModel.deleteMany({});
+    return answerModel.remove({}).exec();
 };
 module.exports = {
     cAnswer,

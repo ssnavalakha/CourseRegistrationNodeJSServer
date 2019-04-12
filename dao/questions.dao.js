@@ -18,7 +18,7 @@ findQuestionById = (id,cb)=>{
 };
 
 deleteAll= ()=>{
-  return questionModel.deleteMany({});
+  return questionModel.remove({}).exec();
 };
 
 module.exports = {

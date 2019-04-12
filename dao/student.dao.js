@@ -17,7 +17,7 @@ delStudent = (studentId,cb) => {
     return studentModel.remove({_id: studentId}).exec(cb);
 };
 deleteAll= ()=>{
-    return studentModel.deleteMany({});
+    return studentModel.remove({}).exec();
 };
     module.exports = {
     cStudent,
